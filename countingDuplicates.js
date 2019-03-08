@@ -1,30 +1,31 @@
 function duplicateCount(text){
     //...
     let answer = "";
-    let letter = "";
-    let count = 0;
+    let foundLetter = "";
+    let count;
     let x = 0;
     let found = false;
     let lower = text.toLowerCase();
     let used = [];
     for (let i = 0; i < (text.length - 1); i++) {
         count = 0;
-        if ((lower.indexOf(lower[i], i + 1) >= 0) && (!(used.includes(lower[i])))) {
+        let currentPosition = lower.indexOf(lower[i], i + 1);
+        if ((currentPosition >= 0) && (!(used.includes(lower[i])))) {
             used.push(lower[i]);
-            letter = text[i];
+            foundLetter = text[i];
             found = true;
-            x = lower.indexOf(lower[i], i + 1);
-            count++; 
+            x = currentPosition;
+            count = 2;
             while (found) {
-                if (lower.indexOf(lower[i], x + 1) >= 0) {
+                if ((lower.indexOf(lower[i], x + 1) >= 0) && (x < lower.length)) {
                     console.log(count)
                     count++; 
-                    x = lower.indexOf(lower[i], i + 1);
+                    x = lower.indexOf(lower[i], x + 1);
                 } else {
                     found = false;
                 }
             }
-            console.log(letter, "was found", count, "times");
+            console.log(foundLetter, "was found", count, "times");
         }
     }
   }
